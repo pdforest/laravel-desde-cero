@@ -1,0 +1,85 @@
+C:\Lab\workspaces>laravel new laravel-desde-cero
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan optimize:clear
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:controller --help
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:controller ProductController
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:migration --help
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:migration CreateProductsTable
+Created Migration: 2023_12_18_115500_create_products_table
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan migrate:fresh    // OJO el "fresh" borra todo antes
+Dropped all tables successfully.
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (9.06ms)
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table (7.73ms)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (8.08ms)
+Migrating: 2019_12_14_000001_create_personal_access_tokens_table
+Migrated:  2019_12_14_000001_create_personal_access_tokens_table (10.72ms)
+Migrating: 2023_12_18_115500_create_products_table
+Migrated:  2023_12_18_115500_create_products_table (3.80ms)
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Product
+Model created successfully.
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:factory ProductFactory --model=Product
+Factory created successfully.
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan tinker
+Psy Shell v0.11.22 (PHP 7.4.33 — cli) by Justin Hileman
+> App\Models\Product::factory()->make();
+= App\Models\Product {#6188
+    title: "Doloremque fugit a suscipit.",
+    description: "Exercitationem consequatur a et consequuntur. Et ut fuga vel sit tempora vel ut.",
+    price: 93.94,
+    stock: 6,
+    status: "available",
+  }
+
+
+> App\Models\Product::factory()->count(5)->make();      // genera 5
+
+> App\Models\Product::factory()->create();      // crea 1 en la DB, notar que tiene "id"
+= App\Models\Product {#6191
+    title: "Nemo tenetur ut et.",
+    description: "Impedit a ratione quae nesciunt quia alias et.",
+    price: 37.41,
+    stock: 9,
+    status: "unavailable",
+    updated_at: "2023-12-18 13:59:08",
+    created_at: "2023-12-18 13:59:08",
+    id: 1,
+  }
+
+
+> App\Models\Product::factory()->count(10)->create();   // crea 10 en la DB
+
+Esto se agrega en el seeder DatabaseSeeder.php
+
+Luego se ejecuta con la migracion:
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan migrate:fresh --seed
+Dropped all tables successfully.
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (9.75ms)
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table (6.88ms)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (7.89ms)
+Migrating: 2019_12_14_000001_create_personal_access_tokens_table
+Migrated:  2019_12_14_000001_create_personal_access_tokens_table (10.35ms)
+Migrating: 2023_12_18_115500_create_products_table
+Migrated:  2023_12_18_115500_create_products_table (3.51ms)
+Database seeding completed successfully.
+
+Se puede ejecutar solamente el seeder, en este caso agrega 50 productos adicionales:
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan db:seed
+Database seeding completed successfully.
+
