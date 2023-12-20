@@ -83,3 +83,38 @@ Se puede ejecutar solamente el seeder, en este caso agrega 50 productos adiciona
 C:\Lab\workspaces\laravel-desde-cero>php artisan db:seed
 Database seeding completed successfully.
 
+C:\Lab\workspaces\laravel-desde-cero>composer require laravel/ui
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan ui --help
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan ui bootstrap --auth
+Bootstrap scaffolding installed successfully.
+Please run "npm install && npm run dev" to compile your fresh scaffolding.
+Authentication scaffolding generated successfully.
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan migrate:fresh --seed
+
+Laravel Vite se lanzó con Laravel 9 y pretende reemplazar progresivamente a Laravel Mix.
+
+npm run dev (con Mix), usar npm run build (en Vite)
+npm run watch (en Mix), usar npm run dev (en Vite)
+
+C:\Lab\workspaces\laravel-desde-cero>npm --version
+9.8.1
+
+C:\Lab\workspaces\laravel-desde-cero>npm install
+
+C:\Lab\workspaces\laravel-desde-cero>npm run dev
+C:\Lab\workspaces\laravel-desde-cero>npm run dev
+
+   Laravel Mix v6.0.49
+
+✔ Compiled Successfully in 6663ms
+┌────────────────────────────────────────────────────┬──────────┐
+│                                               File │ Size     │
+├────────────────────────────────────────────────────┼──────────┤
+│                                         /js/app.js │ 2.19 MiB │
+│                                        css/app.css │ 270 KiB  │
+└────────────────────────────────────────────────────┴──────────┘
+webpack compiled successfully
+
