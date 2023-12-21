@@ -30,6 +30,8 @@ Model created successfully.
 C:\Lab\workspaces\laravel-desde-cero>php artisan make:factory ProductFactory --model=Product
 Factory created successfully.
 
+──────────────────────────────────────────────────────────────
+
 C:\Lab\workspaces\laravel-desde-cero>php artisan tinker
 Psy Shell v0.11.22 (PHP 7.4.33 — cli) by Justin Hileman
 > App\Models\Product::factory()->make();
@@ -83,6 +85,8 @@ Se puede ejecutar solamente el seeder, en este caso agrega 50 productos adiciona
 C:\Lab\workspaces\laravel-desde-cero>php artisan db:seed
 Database seeding completed successfully.
 
+──────────────────────────────────────────────────────────────
+
 C:\Lab\workspaces\laravel-desde-cero>composer require laravel/ui
 
 C:\Lab\workspaces\laravel-desde-cero>php artisan ui --help
@@ -93,6 +97,8 @@ Please run "npm install && npm run dev" to compile your fresh scaffolding.
 Authentication scaffolding generated successfully.
 
 C:\Lab\workspaces\laravel-desde-cero>php artisan migrate:fresh --seed
+
+──────────────────────────────────────────────────────────────
 
 Laravel Vite se lanzó con Laravel 9 y pretende reemplazar progresivamente a Laravel Mix.
 
@@ -117,4 +123,27 @@ C:\Lab\workspaces\laravel-desde-cero>npm run dev
 │                                        css/app.css │ 270 KiB  │
 └────────────────────────────────────────────────────┴──────────┘
 webpack compiled successfully
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:request ProductRequest
+
+──────────────────────────────────────────────────────────────
+
+Payment   ┌--+ Product +--┐
+  │       │     │         │
+  │       │     +         +
+Order+----┘   Image      Cart
+  +             │
+  └----------- User
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Image -a
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Cart -a
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Order -a
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Payment -a
+
+El modificador -a (--all) crea ademas del modelo, el controlador, factory, migracion, seeder y policy
+
+Elimino los seeders porque vamos a orquestar todo en el DatabaseSeeder
 
