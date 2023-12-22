@@ -135,6 +135,13 @@ Order+----┘   Image      Cart
   +             │
   └----------- User
 
+Product: id,title,description,price,stock,status,created_at,updated_at
+User:id,name,email,email_verified_at,password,remember_token,admin_since,created_at,updated_at
+Image:id,path,created_at,updated_at
+Cart:id,created_at,updated_at
+Order:id,status,customer_id,created_at,updated_at
+Payment:id,amount,payed_at,order_id,created_at,updated_at
+
 C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Image -a
 
 C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Cart -a
@@ -146,4 +153,92 @@ C:\Lab\workspaces\laravel-desde-cero>php artisan make:model Payment -a
 El modificador -a (--all) crea ademas del modelo, el controlador, factory, migracion, seeder y policy
 
 Elimino los seeders porque vamos a orquestar todo en el DatabaseSeeder
+
+──────────────────────────────────────────────────────────────
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan tinker
+Psy Shell v0.11.22 (PHP 7.4.33 — cli) by Justin Hileman
+
+> App\Models\Cart::factory()->make();
+= App\Models\Cart {#7162}
+
+> App\Models\Cart::factory()->create();
+= App\Models\Cart {#7158
+    updated_at: "2023-12-22 12:23:21",
+    created_at: "2023-12-22 12:23:21",
+    id: 1,
+  }
+
+> App\Models\Order::factory()->create();
+= App\Models\Order {#7157
+    status: "shipped",
+    updated_at: "2023-12-22 12:23:39",
+    created_at: "2023-12-22 12:23:39",
+    id: 1,
+  }
+
+> App\Models\Payment::factory()->create();
+= App\Models\Payment {#7164
+    amount: 182.42,
+    payed_at: "2023-11-26 09:39:35",
+    updated_at: "2023-12-22 12:26:18",
+    created_at: "2023-12-22 12:26:18",
+    id: 1,
+  }
+
+> App\Models\Payment::factory()->create();
+= App\Models\Payment {#7172
+    amount: 119.07,
+    payed_at: "2023-06-11 01:46:49",
+    updated_at: "2023-12-22 12:26:34",
+    created_at: "2023-12-22 12:26:34",
+    id: 2,
+  }
+
+> App\Models\User::factory()->create();
+= App\Models\User {#7176
+    name: "Alfonso Kessler MD",
+    email: "bobbie06@example.net",
+    email_verified_at: "2023-12-22 12:27:36",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    #remember_token: "PLnLbSFckg",
+    admin_since: "2023-12-22 12:27:36",
+    updated_at: "2023-12-22 12:27:36",
+    created_at: "2023-12-22 12:27:36",
+    id: 2,
+  }
+
+> App\Models\User::factory()->create();
+= App\Models\User {#7158
+    name: "Sigmund Labadie",
+    email: "herman.mya@example.net",
+    email_verified_at: "2023-12-22 12:27:57",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    #remember_token: "E2kvQDpuPL",
+    admin_since: null,
+    updated_at: "2023-12-22 12:27:57",
+    created_at: "2023-12-22 12:27:57",
+    id: 3,
+  }
+
+  > App\Models\Image::factory()->create();
+= App\Models\Image {#7154
+    path: "img/products/10.jpg",
+    updated_at: "2023-12-22 12:30:48",
+    created_at: "2023-12-22 12:30:48",
+    id: 1,
+  }
+
+> App\Models\Image::factory()->user()->create();
+= App\Models\Image {#7157
+    path: "img/users/5.jpg",
+    updated_at: "2023-12-22 12:30:59",
+    created_at: "2023-12-22 12:30:59",
+    id: 2,
+  }
+
+──────────────────────────────────────────────────────────────
+
+
+
 
