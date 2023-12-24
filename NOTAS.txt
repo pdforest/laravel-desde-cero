@@ -238,6 +238,380 @@ Psy Shell v0.11.22 (PHP 7.4.33 — cli) by Justin Hileman
   }
 
 ──────────────────────────────────────────────────────────────
+RELACIONES
+──────────────────────────────────────────────────────────────
+
+> $order = App\Models\Order::factory()->create()
+= App\Models\Order {#7127
+    status: "shipped",
+    updated_at: "2023-12-23 15:44:27",
+    created_at: "2023-12-23 15:44:27",
+    id: 1,
+  }
+
+> $payment = App\Models\Payment::factory()->create(['order_id' => $order->id]);
+= App\Models\Payment {#7175
+    amount: 466.41,
+    payed_at: "2023-12-13 18:24:01",
+    order_id: 1,
+    updated_at: "2023-12-23 15:44:35",
+    created_at: "2023-12-23 15:44:35",
+    id: 1,
+  }
+
+  > $order->payment;
+= App\Models\Payment {#7156
+    id: "1",
+    amount: "466.41",
+    payed_at: "2023-12-13 18:24:01",
+    order_id: "1",
+    created_at: "2023-12-23 15:44:35",
+    updated_at: "2023-12-23 15:44:35",
+  }
+
+//order sin parentecis Eloquent te trae la instancia
+> $payment->order;
+= App\Models\Order {#7165
+    id: "1",
+    status: "shipped",
+    created_at: "2023-12-23 15:44:27",
+    updated_at: "2023-12-23 15:44:27",
+  }
+
+//order() con parentecis referencia a la funcion y te permite seguir encadenandole cosas
+//porqeue es un query builder
+> $payment->order();
+= Illuminate\Database\Eloquent\Relations\BelongsTo {#7125}
+
+> $payment->order()->first();
+= App\Models\Order {#7168
+    id: "1",
+    status: "shipped",
+    created_at: "2023-12-23 15:44:27",
+    updated_at: "2023-12-23 15:44:27",
+  }
+
+──────────────────────────────────────────────────────────────
+
+> $user = App\Models\User::factory()->create()
+= App\Models\User {#7164
+    name: "Prof. Savion Lindgren MD",
+    email: "ynolan@example.com",
+    email_verified_at: "2023-12-24 08:14:54",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    #remember_token: "p1adBfCijl",
+    admin_since: "2023-12-24 08:14:54",
+    updated_at: "2023-12-24 08:14:54",
+    created_at: "2023-12-24 08:14:54",
+    id: 1,
+  }
+
+> $order = App\Models\Order::factory()->create(['customer_id' => $user->id])
+= App\Models\Order {#7197
+    status: "paid",
+    customer_id: 1,
+    updated_at: "2023-12-24 08:15:42",
+    created_at: "2023-12-24 08:15:42",
+    id: 1,
+  }
+
+> $user->orders
+= Illuminate\Database\Eloquent\Collection {#7190
+    all: [
+      App\Models\Order {#7193
+        id: "1",
+        status: "paid",
+        customer_id: "1",
+        created_at: "2023-12-24 08:15:42",
+        updated_at: "2023-12-24 08:15:42",
+      },
+    ],
+  }
+
+> $order->user
+= App\Models\User {#7125
+    id: "1",
+    name: "Prof. Savion Lindgren MD",
+    email: "ynolan@example.com",
+    email_verified_at: "2023-12-24 08:14:54",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    admin_since: "2023-12-24 08:14:54",
+    #remember_token: "p1adBfCijl",
+    created_at: "2023-12-24 08:14:54",
+    updated_at: "2023-12-24 08:14:54",
+  }
+
+> $user->orders()->create()
+= App\Models\Order {#7126
+    customer_id: 1,
+    updated_at: "2023-12-24 08:33:40",
+    created_at: "2023-12-24 08:33:40",
+    id: 4,
+  }
+
+> $user->orders
+= Illuminate\Database\Eloquent\Collection {#7176
+    all: [
+      App\Models\Order {#7177
+        id: "1",
+        status: "paid",
+        customer_id: "1",
+        created_at: "2023-12-24 08:15:42",
+        updated_at: "2023-12-24 08:15:42",
+      },
+      App\Models\Order {#7178
+        id: "2",
+        status: "shipped",
+        customer_id: "1",
+        created_at: "2023-12-24 08:18:02",
+        updated_at: "2023-12-24 08:18:02",
+      },
+      App\Models\Order {#7179
+        id: "3",
+        status: "shipped",
+        customer_id: "1",
+        created_at: "2023-12-24 08:20:30",
+        updated_at: "2023-12-24 08:20:30",
+      },
+      App\Models\Order {#7180
+        id: "4",
+        status: "pending",
+        customer_id: "1",
+        created_at: "2023-12-24 08:33:40",
+        updated_at: "2023-12-24 08:33:40",
+      },
+    ],
+  }
+
+> $order = App\Models\Order::first()
+= App\Models\Order {#7170
+    id: "1",
+    status: "paid",
+    customer_id: "1",
+    created_at: "2023-12-24 08:15:42",
+    updated_at: "2023-12-24 08:15:42",
+  }
+
+──────────────────────────────────────────────────────────────
+
+
+Payment             ┌--+ Product +--┐
+  │                 +     │         +
+  │        Order_Product  │     Cart_Product
+  │                 +     │         +
+  │                 │     │         │
+Order +-------------┘     +         +
+  +                      Image      Cart
+  |                       │
+  └--------------------- User
+
+php artisan make:migration CreateCartProductTable
+php artisan make:migration CreateOrderProductTable
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:migration CreateCartProductTable
+Created Migration: 2023_12_24_084934_create_cart_product_table
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:migration CreateOrderProductTable
+Created Migration: 2023_12_24_085154_create_order_product_table
+
+──────────────────────────────────────────────────────────────
+
+> $order->products()->attach([ 1 => ['quantity' => 10], 2 => ['quantity' => 5], 3 => ['quantity' = 7]])
+= null
+
+> $order->products
+= Illuminate\Database\Eloquent\Collection {#7170
+    all: [],
+  }
+
+> $order = $order->fresh()
+= App\Models\Order {#7180
+    id: "1",
+    status: "pending",
+    customer_id: "1",
+    created_at: "2023-12-24 10:50:14",
+    updated_at: "2023-12-24 10:50:14",
+  }
+
+> $order->products
+= Illuminate\Database\Eloquent\Collection {#7270
+    all: [
+      App\Models\Product {#7268
+        id: "1",
+        title: "Et animi et.",
+        description: "Repudiandae qui vitae et animi illo pariatur quaerat.",
+        price: "91.26",
+        stock: "7",
+        status: "available",
+        created_at: "2023-12-24 09:19:32",
+        updated_at: "2023-12-24 09:19:32",
+        pivot: Illuminate\Database\Eloquent\Relations\Pivot {#7265
+          order_id: "1",
+          product_id: "1",
+          quantity: "10",
+        },
+      },
+      App\Models\Product {#7267
+        id: "2",
+        title: "Soluta reiciendis esse voluptas.",
+        description: "Placeat est quia maxime impedit fugiat quisquam eos. Voluptates molestiae ut qui a.",
+        price: "72.39",
+        stock: "8",
+        status: "unavailable",
+        created_at: "2023-12-24 09:19:32",
+        updated_at: "2023-12-24 09:19:32",
+        pivot: Illuminate\Database\Eloquent\Relations\Pivot {#7273
+          order_id: "1",
+          product_id: "2",
+          quantity: "5",
+        },
+      },
+      App\Models\Product {#7264
+        id: "3",
+        title: "Ea eligendi.",
+        description: "Deleniti rem perferendis consequatur vel ex. Quae aut impedit voluptate excepturi.",
+        price: "21.46",
+        stock: "3",
+        status: "unavailable",
+        created_at: "2023-12-24 09:19:32",
+        updated_at: "2023-12-24 09:19:32",
+        pivot: Illuminate\Database\Eloquent\Relations\Pivot {#7256
+          order_id: "1",
+          product_id: "3",
+          quantity: "7",
+        },
+      },
+    ],
+  }
+
+>   
+
+──────────────────────────────────────────────────────────────
+
+> $user = App\Models\User::factory()->create()
+= App\Models\User {#7169
+    name: "Herman Nikolaus PhD",
+    email: "ladarius75@example.com",
+    email_verified_at: "2023-12-24 11:45:48",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    #remember_token: "GHuLimv5BX",
+    admin_since: "2023-12-24 11:45:48",
+    updated_at: "2023-12-24 11:45:48",
+    created_at: "2023-12-24 11:45:48",
+    id: 1,
+  }
+
+> $user->image()->save(App\Models\Image::factory()->make())
+= App\Models\Image {#7179
+    path: "img/products/9.jpg",
+    imageable_id: 1,
+    imageable_type: "App\Models\User",
+    updated_at: "2023-12-24 11:50:58",
+    created_at: "2023-12-24 11:50:58",
+    id: 1,
+  }
+
+> $user->image
+= App\Models\Image {#7181
+    id: "1",
+    path: "img/products/9.jpg",
+    created_at: "2023-12-24 11:50:58",
+    updated_at: "2023-12-24 11:50:58",
+    imageable_type: "App\Models\User",
+    imageable_id: "1",
+  }
+
+> $image = $user->image
+= App\Models\Image {#7181
+    id: "1",
+    path: "img/products/9.jpg",
+    created_at: "2023-12-24 11:50:58",
+    updated_at: "2023-12-24 11:50:58",
+    imageable_type: "App\Models\User",
+    imageable_id: "1",
+  }
+
+> $image->imageable
+= App\Models\User {#7126
+    id: "1",
+    name: "Herman Nikolaus PhD",
+    email: "ladarius75@example.com",
+    email_verified_at: "2023-12-24 11:45:48",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    admin_since: "2023-12-24 11:45:48",
+    #remember_token: "GHuLimv5BX",
+    created_at: "2023-12-24 11:45:48",
+    updated_at: "2023-12-24 11:45:48",
+  }
+
+──────────────────────────────────────────────────────────────
+
+> $product = App\Models\Product::find(2)
+= App\Models\Product {#7179
+    id: "2",
+    title: "Qui quas sint ipsa.",
+    description: "Ex adipisci mollitia non iusto et.",
+    price: "51.76",
+    stock: "2",
+    status: "available",
+    created_at: "2023-12-24 11:35:04",
+    updated_at: "2023-12-24 11:35:04",
+  }
+
+> $product->images()->save(App\Models\Image::factory()->make())
+= App\Models\Image {#7190
+    path: "img/products/9.jpg",
+    imageable_id: 2,
+    imageable_type: "App\Models\Product",
+    updated_at: "2023-12-24 12:07:06",
+    created_at: "2023-12-24 12:07:06",
+    id: 2,
+  }
+
+> $image = App\Models\Image::find(2)
+= App\Models\Image {#7167
+    id: "2",
+    path: "img/products/9.jpg",
+    created_at: "2023-12-24 12:07:06",
+    updated_at: "2023-12-24 12:07:06",
+    imageable_type: "App\Models\Product",
+    imageable_id: "2",
+  }
+
+> $image->imageable
+= App\Models\Product {#7186
+    id: "2",
+    title: "Qui quas sint ipsa.",
+    description: "Ex adipisci mollitia non iusto et.",
+    price: "51.76",
+    stock: "2",
+    status: "available",
+    created_at: "2023-12-24 11:35:04",
+    updated_at: "2023-12-24 11:35:04",
+  }
+
+──────────────────────────────────────────────────────────────
+Eliminamos las migraciones cart_product y order_product y creamos una 
+sola polimorfica
+
+Payment               Productable 
+  │                        │            
+  │               ┌---+ Product +-------┐ 
+  │   morphToMany |        │            | morphToMany
+  │               │        │ morphMany  │
+  |               |        |            |
+Order +-----------┘        +            +
+  +                      Image         Cart
+  |                        │
+  |                        │ morphOne
+  |                        │
+  └---------------------- User
+
+
+$product->orders()->attach([ 1 => ['quantity' => 10]])
+$cart->products()->attach([ $product->id => ['quantity' => 10]])
+$product->orders
+$product->carts
+$product
 
 
 
