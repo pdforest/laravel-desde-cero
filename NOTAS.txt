@@ -1,3 +1,7 @@
+php artisan serve
+
+──────────────────────────────────────────────────────────────
+
 C:\Lab\workspaces>laravel new laravel-desde-cero
 
 C:\Lab\workspaces\laravel-desde-cero>php artisan optimize:clear
@@ -612,6 +616,12 @@ $cart->products()->attach([ $product->id => ['quantity' => 10]])
 $product->orders
 $product->carts
 $product
+
+──────────────────────────────────────────────────────────────
+Controller anidado:
+
+PS C:\Lab\workspaces\laravel-desde-cero> php artisan make:controller ProductCartController -m Cart -p Product
+Controller created successfully.
 
 
 
