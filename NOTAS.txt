@@ -620,7 +620,11 @@ $product
 ──────────────────────────────────────────────────────────────
 Controller anidado:
 
-PS C:\Lab\workspaces\laravel-desde-cero> php artisan make:controller ProductCartController -m Cart -p Product
+php artisan make:controller ProductCartController -m Cart -p Product
+Controller created successfully.
+
+otro anidado:
+php artisan make:controller OrderPaymentController -m Payment -p Order
 Controller created successfully.
 
 

@@ -19,6 +19,8 @@ Route::resource('products', 'ProductController');
 
 Route::resource('products.carts', 'ProductCartController')->only(['store','destroy']);
 
+Route::resource('orders.payments', 'OrderPaymentController')->only(['create','store']);
+
 //Route::get('/products', 'ProductController@index')->name('products.index');
 
 //Route::get('/products/create', 'ProductController@create')->name("products.create");
@@ -34,6 +36,8 @@ Route::resource('products.carts', 'ProductCartController')->only(['store','destr
 //Route::delete('/products/{product}', 'ProductController@destroy')->name('products.destroy');
 
 Route::resource('carts', 'CartController')->only(['index']);
+
+Route::resource('orders', 'OrderController')->only(['create','store']);
 
 Auth::routes();
 
