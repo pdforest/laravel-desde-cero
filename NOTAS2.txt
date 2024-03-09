@@ -1,0 +1,72 @@
+C:\Lab\workspaces\laravel-desde-cero>php artisan tinker
+Psy Shell v0.11.22 (PHP 7.4.33 — cli) by Justin Hileman
+> $user = App\Models\User::find(18)
+= App\Models\User {#7146
+    id: "18",
+    name: "Salvatore Beier PhD",
+    email: "blick.garth@example.org",
+    email_verified_at: "2024-01-07 18:49:58",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    admin_since: "2024-01-07 18:49:58",
+    #remember_token: "lAClidigJf",
+    created_at: "2024-01-07 18:49:58",
+    updated_at: "2024-01-07 18:49:58",
+  }
+
+> $user->isAdmin()
+= true
+
+> $user = App\Models\User::find(20)
+= App\Models\User {#7139
+    id: "20",
+    name: "Gunner Jerde Sr.",
+    email: "wisoky.chase@example.net",
+    email_verified_at: "2024-01-07 18:49:58",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    admin_since: null,
+    #remember_token: "tqhdjtQ3Lx",
+    created_at: "2024-01-07 18:49:58",
+    updated_at: "2024-01-07 18:49:58",
+  }
+
+> $user->isAdmin()
+= false
+
+> $user->fill(['admin_since' => now()->addYears(5)]);
+= App\Models\User {#7139
+    id: "20",
+    name: "Gunner Jerde Sr.",
+    email: "wisoky.chase@example.net",
+    email_verified_at: "2024-01-07 18:49:58",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    admin_since: null,
+    #remember_token: "tqhdjtQ3Lx",
+    created_at: "2024-01-07 18:49:58",
+    updated_at: "2024-01-07 18:49:58",
+  }
+
+//como admin_since no es fillable lo forzamos con forceFill()
+
+> $user->forceFill(['admin_since' => now()->addYears(5)]);
+= App\Models\User {#7139
+    id: "20",
+    name: "Gunner Jerde Sr.",
+    email: "wisoky.chase@example.net",
+    email_verified_at: "2024-01-07 18:49:58",
+    #password: "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    admin_since: "2029-03-09 15:51:07",
+    #remember_token: "tqhdjtQ3Lx",
+    created_at: "2024-01-07 18:49:58",
+    updated_at: "2024-01-07 18:49:58",
+  }
+
+>
+--------------------------------------------------------------------------------
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:middleware CheckIfAdmin
+Middleware created successfully.
+
+C:\Lab\workspaces\laravel-desde-cero>php artisan make:controller Panel\PanelController
+Controller created successfully.
+
+

@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-
-use App\Models\Product;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     
-    public function index() {
-
+    public function index() 
+    {
         return view('products.index')->with([
             'products' => DB::table('products')->orderBy('id', 'desc')->get(),
         ]);
