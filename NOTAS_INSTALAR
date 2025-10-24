@@ -1,0 +1,76 @@
+VS CODE
+Instalar desde Ms Store
+
+GIT
+PS C:\WINDOWS\System32> winget install --id Git.Git -e --source winget
+
+NOTEPAD ++
+PS C:\WINDOWS\System32> winget install --id=Notepad++.Notepad++ -e
+
+NVM
+PS C:\WINDOWS\System32> winget install --id=CoreyButler.NVMforWindows -e
+
+NODE
+nvm install 22
+nvm use v22.21.0
+
+7-ZIP
+https://www.7-zip.org/
+
+VC++ REDIST
+https://learn.microsoft.com/es-es/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-supported-redistributable-version
+VC_redist.x64.exe
+
+XAMPP
+https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/
+xampp-portable-windows-x64-8.2.12-0-VS16.zip
+Descompactar en c:\Datos\xampp 
+Agregar al path: C:\Datos\xampp\php
+Ejecutar: C:\Datos\xampp\setup_xampp.bat
+Ejecutar: C:\Datos\xampp\xampp-control.exe
+
+COMPOSER
+https://getcomposer.org/download/
+Composer-Setup.exe
+
+--------------------------------------------------------------------------------------
+node --version
+v22.21.0
+
+npm --version
+10.9.4
+
+php --version
+PHP 8.2.12 (cli) (built: Oct 24 2023 21:15:15) (ZTS Visual C++ 2019 x64)
+Copyright (c) The PHP Group
+Zend Engine v4.2.12, Copyright (c) Zend Technologies
+
+composer --version
+Composer version 2.8.12 2025-09-19 13:41:59
+PHP version 8.2.12 (C:\Datos\xampp\php\php.exe)
+Run the "diagnose" command to get more detailed diagnostics output.
+
+--------------------------------------------------------------------------------------
+LARAVEL 10.x
+https://laravel.com/docs/10.x/installation
+composer create-project laravel/laravel nuevo-proyecto "10.*"
+
+--------------------------------------------------------------------------------------
+RECUPERAR desde github
+git clone https://github.com/pdforest/laravel-desde-cero.git
+laravel-desde-cero>composer install
+laravel-desde-cero>php artisan key:generate
+Crear el archivo database\database.sqlite
+Copiar .env.example como .env
+Configurar en .env
+  DB_CONNECTION=sqlite
+  #DB_HOST=127.0.0.1
+  #DB_PORT=3306
+  #DB_DATABASE=laravel_desde_cero
+  #DB_USERNAME=root
+  #DB_PASSWORD=
+laravel-desde-cero>php artisan migrate:fresh --seed
+laravel-desde-cero>php artisan serve
+http://127.0.0.1:8000
+
+
